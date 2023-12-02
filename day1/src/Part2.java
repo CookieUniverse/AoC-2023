@@ -88,12 +88,14 @@ public class Part2 {
 
     public static void main(String[] args) {
         try {
-            Scanner file1 = new Scanner(new FileReader("day1" + File.separator + "tests" + File.separator + "part2test.txt"));
-            read(file1);
-            file1.close();
-            Scanner file2 = new Scanner(new FileReader("day1" + File.separator + "src" + File.separator + "input.txt"));
-            read(file2);
-            file2.close();
+            Scanner test = new Scanner(new FileReader("day1" + File.separator + "tests" + File.separator + "part2test.txt"));
+            System.out.println("Test answer:");
+            read(test);
+            test.close();
+            Scanner puzzle = new Scanner(new FileReader("day1" + File.separator + "src" + File.separator + "input.txt"));
+            System.out.println("Puzzle answer:");
+            read(puzzle);
+            puzzle.close();
         }
         catch (FileNotFoundException e) {
             System.out.println("File was not found");
