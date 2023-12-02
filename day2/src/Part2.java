@@ -14,27 +14,19 @@ public class Part2 {
             red = green = blue = 0;
 
             for (String set : sets) {
-                String[] cubes = set.split(",");
-                for (String pair : cubes) {
+                String[] subSets = set.split(",");
+                for (String pair : subSets) {
                     String[] item = pair.trim().split(" ");
                     int num = Integer.parseInt(item[0]);
                     Part1.Color color = Part1.Color.valueOf(item[1].trim().toUpperCase());
                     switch (color) {
-                        case RED -> {
-                            if (num > red)
-                                red = num;
-                        }
-                        case GREEN -> {
-                            if (num > green)
-                                green = num;
-                        }
-                        case BLUE -> {
-                            if (num > blue)
-                                blue = num;
-                        }
+                        case RED -> red = Math.max(num, red);
+                        case GREEN -> green = Math.max(num, green);
+                        case BLUE -> blue = Math.max(num, blue);
                     }
                 }
             }
+
             sum += red * green * blue;
         }
         System.out.println(sum);
