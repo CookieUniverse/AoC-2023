@@ -1,3 +1,4 @@
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.Scanner;
@@ -87,10 +88,10 @@ public class Part2 {
 
     public static void main(String[] args) {
         try {
-            Scanner file1 = new Scanner(new FileReader("day1\\tests\\part2test.txt"));
+            Scanner file1 = new Scanner(new FileReader("day1" + File.separator + "tests" + File.separator + "part2test.txt"));
             read(file1);
             file1.close();
-            Scanner file2 = new Scanner(new FileReader("day1\\src\\input.txt"));
+            Scanner file2 = new Scanner(new FileReader("day1" + File.separator + "src" + File.separator + "input.txt"));
             read(file2);
             file2.close();
         }
