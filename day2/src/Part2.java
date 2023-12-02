@@ -33,10 +33,10 @@ public class Part2 {
     }
     public static void main(String[] args) {
         try {
-            Scanner file1 = new Scanner(new FileReader("day2\\src\\input1.txt"));
+            Scanner file1 = new Scanner(new FileReader("day2\\tests\\test.txt"));
             read(file1);
             file1.close();
-            Scanner file2 = new Scanner(new FileReader("day2\\src\\input2.txt"));
+            Scanner file2 = new Scanner(new FileReader("day2\\src\\input.txt"));
             read(file2);
             file2.close();
         }
