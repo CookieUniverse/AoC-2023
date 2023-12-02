@@ -68,7 +68,7 @@ public class Part1 {
             System.out.println("Test answer:");
             read(test);
             test.close();
-            Scanner puzzle = new Scanner(new FileReader("day1" + File.separator + "src" + File.separator + "input.txt"));
+            Scanner puzzle = new Scanner(new FileReader("day2" + File.separator + "src" + File.separator + "input.txt"));
             System.out.println("Puzzle answer:");
             read(puzzle);
             puzzle.close();
