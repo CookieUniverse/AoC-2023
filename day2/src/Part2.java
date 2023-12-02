@@ -37,7 +37,7 @@ public class Part2 {
             Scanner file1 = new Scanner(new FileReader("day2" + File.separator + "tests" + File.separator + "test.txt"));
             read(file1);
             file1.close();
-            Scanner file2 = new Scanner(new FileReader("day2" + File.separator + "src" + File.separator + " input.txt"));
+            Scanner file2 = new Scanner(new FileReader("day2" + File.separator + "src" + File.separator + "input.txt"));
             read(file2);
             file2.close();
         }
