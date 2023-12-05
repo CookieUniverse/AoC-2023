@@ -1,5 +1,6 @@
 import java.io.*;
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class Part2 {
 
@@ -27,19 +28,16 @@ public class Part2 {
         while (file.hasNext()) {
             String line = file.nextLine();
             int id = Integer.parseInt(line.split(":")[0].replaceAll("\\D", ""));
-            String[] sets = line.split(":")[1].split("\\|");
-            String[] winningNumbers = sets[0].trim().split(" ");
-            String[] myNumbers = sets[1].trim().split(" ");
-            Set<Integer> winningNumbersSet = new HashSet<>();
-            for (String n : winningNumbers) {
-                if (!n.isEmpty())
-                    winningNumbersSet.add(Integer.parseInt(n));
-            }
-            int matching = 0;
-            for (String n : myNumbers) {
-                if (!n.isEmpty() && winningNumbersSet.contains(Integer.parseInt(n)))
-                    matching++;
-            }
+            String[] sets = line.split(":")[1].split(" \\| ");
+            String[] winningNumbers = sets[0].trim().replaceAll("\\s+", " ").split(" ");
+            String[] myNumbers = sets[1].trim().replaceAll("\\s+", " ").split(" ");
+            Set<Integer> winningNumbersSet = Arrays.stream(winningNumbers)
+                    .map(Integer::parseInt)
+                    .collect(Collectors.toSet());
+            int matching = (int) Arrays.stream(myNumbers)
+                    .map(Integer::parseInt)
+                    .filter(winningNumbersSet::contains)
+                    .count();
             for (int i = id; i < id + matching; i++) {
                 nCopies[i]++;
                 matches[id - 1]++;

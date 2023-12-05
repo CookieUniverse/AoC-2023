@@ -1,9 +1,10 @@
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.util.HashSet;
+import java.util.Arrays;
 import java.util.Scanner;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class Part1 {
 
@@ -12,14 +13,12 @@ public class Part1 {
         while (file.hasNext()) {
             int value = 0;
             String line = file.nextLine();
-            String[] sets = line.split(":")[1].split("\\|");
-            String[] winningNumbers = sets[0].trim().split(" ");
-            String[] myNumbers = sets[1].trim().split(" ");
-            Set<Integer> winningNumbersSet = new HashSet<>();
-            for (String n : winningNumbers) {
-                if (!n.isEmpty())
-                    winningNumbersSet.add(Integer.parseInt(n));
-            }
+            String[] sets = line.split(": ")[1].split(" \\| ");
+            String[] winningNumbers = sets[0].trim().replaceAll("\\s+", " ").split(" ");
+            String[] myNumbers = sets[1].trim().replaceAll("\\s+", " ").split(" ");
+            Set<Integer> winningNumbersSet = Arrays.stream(winningNumbers)
+                    .map(Integer::parseInt)
+                    .collect(Collectors.toSet());
             for (String n : myNumbers) {
                 if (!n.isEmpty() && winningNumbersSet.contains(Integer.parseInt(n)))
                     value = (value == 0) ? 1 : value * 2;
