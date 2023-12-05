@@ -21,10 +21,9 @@ public class Part2 {
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }
-
-        int[] nCopies = new int[lines];
-        int[] matches = new int[lines];
-        int sum = lines;
+        int[] nCards = new int[lines];
+        Arrays.fill(nCards, 1);
+        int sum = 0;
         while (file.hasNext()) {
             String line = file.nextLine();
             int id = Integer.parseInt(line.split(":")[0].replaceAll("\\D", ""));
@@ -39,20 +38,10 @@ public class Part2 {
                     .filter(winningNumbersSet::contains)
                     .count();
             for (int i = id; i < id + matching; i++) {
-                nCopies[i]++;
-                matches[id - 1]++;
+                nCards[i] += nCards[id - 1];
             }
         }
-
-        for (int i = 1; i < lines; i++) {
-            if (nCopies[i] != 0) {
-                for (int j = 1; j <= matches[i]; j++) {
-                    if (i + j < lines)
-                        nCopies[i+j] += nCopies[i];
-                }
-            }
-        }
-        sum += Arrays.stream(nCopies).sum();
+        sum += Arrays.stream(nCards).sum();
         System.out.println(sum);
     }
 
