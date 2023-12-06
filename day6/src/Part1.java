@@ -1,44 +1,38 @@
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class Part1 {
 
     public static void read(Scanner file) {
-        Integer[] times = getTimes(file);
-        Integer[] distances = getDistances(file);
+        Iterator<Integer> times = getTimes(file).iterator();
+        Iterator<Integer> distances = getDistances(file).iterator();
         List<Integer> possibleWins = new ArrayList<>();
 
-        for (int i = 0; i < times.length; i++) {
-            int wins = 0;
-            int time = times[i];
-            int distanceToBeat = distances[i];
-            int velocity = 0;
-            for (int j = time; j >= 0; j--) {
-                if (j * velocity > distanceToBeat) {
-                    wins++;
+        while (times.hasNext() && distances.hasNext()) {
+            int time = times.next();
+            int distance = distances.next();
+            int beaten = 0;
+            for (int i = time; i >= 0; i--) {
+                if (i * (time - i) > distance) {
+                    beaten++;
                 }
-                velocity++;
             }
-            if (wins != 0) {
-                possibleWins.add(wins);
-            }
+            if (beaten != 0)
+                possibleWins.add(beaten);
         }
         System.out.println(possibleWins.stream().reduce(1, (a, b) -> a * b));
     }
 
-    private static Integer[] getDistances(Scanner file) {
+    private static List<Integer> getDistances(Scanner file) {
         String[] nums = file.nextLine().split(": ")[1].trim().replaceAll("\\s+", " ").split(" ");
-        return Arrays.stream(nums).map(Integer::parseInt).toArray(Integer[]::new);
+        return Arrays.stream(nums).map(Integer::parseInt).toList();
     }
 
-    private static Integer[] getTimes(Scanner file) {
+    private static List<Integer> getTimes(Scanner file) {
         String[] nums = file.nextLine().split(": ")[1].trim().replaceAll("\\s+", " ").split(" ");
-        return Arrays.stream(nums).map(Integer::parseInt).toArray(Integer[]::new);
+        return Arrays.stream(nums).map(Integer::parseInt).toList();
     }
 
     public static void main(String[] args) {
