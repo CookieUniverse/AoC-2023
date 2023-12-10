@@ -15,8 +15,8 @@ public class Part2 {
             List<Integer> sequence = Arrays.stream(numbers).map(Integer::parseInt).toList();
             while (!sequence.isEmpty() && !sequence.stream().allMatch(i -> i == 0)) {
                 List<Integer> newSeq = new ArrayList<>();
-                for (int i = sequence.size() - 1; i > 0; i--) {
-                    newSeq.add(0, sequence.get(i) - sequence.get(i - 1));
+                for (int i = 1; i < sequence.size(); i++) {
+                    newSeq.add(sequence.get(i) - sequence.get(i - 1));
                 }
                 firstNumbers.add(0, newSeq.get(0));
                 sequence = newSeq;
